@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+@*<div id="piechart" style="width: 900px; height: 500px;"></div>*@
+
+@*<div id="columnchart_div">
+
+    </div>*@
+<h2>Dashboard</h2>
+<div id="chart_container">
+    <canvas id="bar_chart"></canvas>
+
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Chart.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script>
+        var array = @Html.Raw(Json.Encode(ViewBag.COVIDS));
+        var pac = @Html.Raw(Json.Encode(ViewBag.PACIENTES));
+
+        var ctx = $("#bar_chart");
+        var bacChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: pac,
+                datasets: [{
+                    label: "Pacientes",
+                    data: array,
+                    backgroundColor: ["rgba(242,166,54,.5)", "rgba(145,65,72,.5)", "74,25,92,.5"],
+                    borderColor: ["rgb(242,166,54)", "145,65,72", "rgb(74,25,92)"],
+                    borderWidht:1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: { xAxes: [{ ticks: { beginAtZero: true } }] },
+                legend: {display:false}
+            },
+        });
+    </script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    </script>
+}

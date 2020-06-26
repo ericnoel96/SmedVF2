@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Smed.Models.Paciente>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cedula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellidos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fechanac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lugarnac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.direccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.alergias)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tiposangre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cedula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellidos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Genero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fechanac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lugarnac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.alergias)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tiposangre)
+        </td>
+        <td>
+            @if (Request.IsAuthenticated && User.IsInRole("Med"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.PacienteId })
+            }
+            |
+            @Html.ActionLink("Details", "Details", new { id = item.PacienteId }) |
+            @if (Request.IsAuthenticated && User.IsInRole("Med"))
+            {
+                @Html.ActionLink("Delete", "Delete", new { id = item.PacienteId })
+            }
+        </td>
+    </tr>
+}
+
+</table>
